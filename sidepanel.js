@@ -34,7 +34,7 @@ const caseStatus = document.getElementById("caseStatus");
 const archiveCaseButton = document.getElementById("archiveCase");
 const deleteCaseButton = document.getElementById("deleteCase");
 
-const API_URL = "http://127.0.0.1:8787";
+const API_URL = "https://skims-drafting-assistant.onrender.com";
 const STORAGE_KEY = "skimsCustomerCases";
 const ACTIVE_CASE_KEY = "skimsActiveCustomerCase";
 const SORT_ORDER_KEY = "skimsCaseSortOrder";

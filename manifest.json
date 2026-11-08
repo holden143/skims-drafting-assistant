@@ -8,6 +8,7 @@
     "storage"
   ],
   "host_permissions": [
+    "https://skims-drafting-assistant.onrender.com/*",
     "http://127.0.0.1:8787/*"
   ],
   "background": {
