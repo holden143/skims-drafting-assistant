@@ -517,8 +517,8 @@ Generate only the selected response format.`;
 // START SERVER
 // =====================================
 
-server.listen(PORT, "127.0.0.1", () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(
-    `SKIMS drafting service (Groq) listening on http://127.0.0.1:${PORT}`
+    `SKIMS drafting service (Groq) listening on port ${PORT}`
   );
 });
