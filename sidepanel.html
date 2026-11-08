@@ -1,0 +1,178 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKIMS Support Drafting Assistant</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">CUSTOMER SUPPORT ASSISTANT</div>
+      <h1>SKIMS Drafting Assistant</h1>
+      <p>Manage customer conversations and create QA-conscious responses.</p>
+    </header>
+
+    <!-- CUSTOMER CASE MANAGER -->
+    <section class="case-manager" aria-labelledby="caseManagerTitle">
+      <div class="case-header">
+        <div>
+          <div class="section-eyebrow">WORKSPACE</div>
+          <h2 id="caseManagerTitle">Customer Cases</h2>
+          <p class="hint">Keep each customer's conversation separate.</p>
+        </div>
+        <span id="caseCount" class="case-count">0 / 5</span>
+      </div>
+
+      <div class="new-case-controls">
+        <label for="caseName">Customer name or case label</label>
+        <input
+          id="caseName"
+          type="text"
+          maxlength="80"
+          placeholder="e.g. Customer A or Order inquiry"
+        >
+        <button id="createCase" type="button">+ New Customer Case</button>
+      </div>
+
+      <div class="case-search-wrapper">
+        <label for="caseSearch">Find a customer case</label>
+        <div class="case-search-controls">
+          <input
+            id="caseSearch"
+            type="search"
+            placeholder="Search by name or case ID..."
+          >
+
+          <select id="caseSort" aria-label="Sort customer cases">
+            <option value="recent">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="alphabetical">A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="case-list-header">
+        <span>Your saved cases</span>
+        <span id="caseSaveStatus" class="save-status" aria-live="polite">No active case</span>
+      </div>
+
+      <div id="caseList" class="case-list" aria-live="polite">
+        <div class="empty-cases">
+          <strong>No customer cases yet</strong>
+          <p>Create a case to start organizing your customer conversations.</p>
+        </div>
+      </div>
+
+      <div id="activeCasePanel" class="active-case-panel" hidden>
+        <div class="active-case-heading">
+          <div>
+            <span class="active-label">ACTIVE CUSTOMER</span>
+            <strong id="activeCaseName">No customer selected</strong>
+            <span id="activeCaseId" class="case-id"></span>
+          </div>
+        </div>
+
+        <label for="caseStatus">Case status</label>
+        <select id="caseStatus">
+          <option value="in_progress">In Progress</option>
+          <option value="pending">Pending</option>
+          <option value="resolved">Resolved</option>
+        </select>
+
+        <div class="case-management-actions">
+          <button id="archiveCase" class="secondary" type="button">Archive Case</button>
+          <button id="deleteCase" class="danger" type="button">Delete Case</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="workspace-divider"></div>
+
+    <!-- EXISTING DRAFTING ASSISTANT -->
+    <section class="drafting-workspace">
+      <div class="workspace-heading">
+        <h2>Response Drafting</h2>
+        <p class="hint">Work on the selected customer's conversation.</p>
+      </div>
+
+      <label for="mode">Response format</label>
+      <select id="mode">
+        <option value="email">Email</option>
+        <option value="live_chat">Live Chat</option>
+        <option value="sms">SMS</option>
+      </select>
+      <p id="modeHint" class="hint">Complete email with a greeting and clear resolution.</p>
+
+      <label for="ticket">Customer concern / conversation context</label>
+      <textarea
+        id="ticket"
+        rows="9"
+        placeholder="Paste a de-identified customer message or conversation summary here."
+      ></textarea>
+
+      <details class="sizing-panel">
+        <summary>Fit &amp; sizing assistant <span class="optional">(optional)</span></summary>
+        <p class="hint">Enter measurements in inches to calculate using the internal bra-sizing formula supplied by your team.</p>
+
+        <div class="measurement-grid">
+          <div>
+            <label for="underbust">Underbust (in)</label>
+            <input id="underbust" type="number" min="20" max="60" step="0.1" placeholder="e.g. 35">
+          </div>
+          <div>
+            <label for="overbust">Overbust (in)</label>
+            <input id="overbust" type="number" min="20" max="70" step="0.1" placeholder="e.g. 37">
+          </div>
+        </div>
+
+        <button id="calculateSize" class="secondary" type="button">Calculate bra size</button>
+        <div id="sizeResult" class="size-result" aria-live="polite"></div>
+      </details>
+
+      <label for="resolution">
+        Your confirmed findings or intended resolution
+        <span class="optional">(optional)</span>
+      </label>
+      <textarea
+        id="resolution"
+        rows="4"
+        placeholder="Example: Tracking shows the package is still in transit. Do not promise a delivery date."
+      ></textarea>
+
+      <div class="action-buttons">
+        <button id="generate" type="button">Generate email</button>
+        <button id="fixGrammar" class="secondary" type="button" disabled>Fix Grammar</button>
+      </div>
+
+      <div id="status" role="status" aria-live="polite"></div>
+
+      <label for="output">Generated response</label>
+      <textarea
+        id="output"
+        rows="13"
+        placeholder="Your generated response will appear here."
+        readonly
+      ></textarea>
+
+      <div id="refinementTools" class="refinement-tools" hidden>
+        <div class="refinement-title">Quick refinements</div>
+        <button class="refine-chip" data-refinement="remove_intro" type="button">Remove introduction</button>
+        <button class="refine-chip" data-refinement="remove_acknowledgment" type="button">Remove acknowledgment</button>
+      </div>
+
+      <button id="copy" class="secondary" type="button" disabled>Copy response</button>
+    </section>
+
+    <p class="privacy">
+      <strong>Privacy:</strong> Case information is intended to be stored separately in this Chrome profile. Only the selected customer's relevant information should be sent to the AI service when you generate or fix a response. Do not enter customer personal information unless your employer has approved its storage and processing.
+    </p>
+  </main>
+		<div class="creator-credit">
+		  Created with care by <strong>Holden</strong> ✦
+		</div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

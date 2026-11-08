@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "SKIMS Support Drafting Assistant",
+  "version": "1.2.0",
+  "description": "Draft QA-conscious SKIMS emails, live chat replies, and SMS messages, with customer case management, sizing calculations, and response refinements.",
+  "permissions": [
+    "sidePanel",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8787/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://skims.kustomerapp.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open SKIMS Support Drafting Assistant"
+  }
+}
